@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Web Page Layout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2a2a2a;
+            color: #333;
+            overflow: hidden;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Main container */
+        .container {
+            display: flex;
+            width: 1280px;
+            height: 420px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: slideIn 1.5s ease-out forwards;
+        }
+
+        /* Slide-in animation */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Side panels */
+        .panel {
+            width: 20%;
+            padding: 20px;
+            background: linear-gradient(135deg, #005f73, #0a9396);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Panel content */
+        .output-box {
+            background-color: #e0f7fa;
+            /* Softer background for better visibility */
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 1rem;
+            /* Increased font size for clarity */
+            color: #005f73;
+            /* High contrast text color */
+            text-align: left;
+            line-height: 1;
+            /* Improved readability with line spacing */
+            font-weight: bold;
+        }
+
+        .output-box p {
+            margin: 5px 0;
+        }
+
+        /* Center section */
+        .center-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        /* Search area */
+        .search-title {
+            font-size: 3rem;
+            color: #005f73;
+            margin-bottom: 15px;
+            font-weight: bold;
+            animation: fadeInText 1s ease-out forwards;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            margin-top: 10px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #0a9396;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .search-button {
+            background-color: #0a9396;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .platform-select {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #0a9396;
+            border-radius: 5px;
+            width: 80%;
+        }
+
+        /* DJ Amplifier Animation */
+        .dj-amplifier {
+            display: flex;
+            justify-content: space-evenly;
+            width: 80%;
+            margin: 20px 0;
+            height: 50px;
+        }
+
+        .amplifier-bar {
+            width: 12px;
+            background-color: #e63946;
+            border-radius: 3px;
+            animation: amplify 0.6s ease-in-out infinite alternate;
+            transform-origin: bottom;
+        }
+
+        /* Dynamic amplifier animation with staggered delays */
+        .dj-amplifier .amplifier-bar:nth-child(1) {
+            animation-delay: 0.8s;
+            animation-duration: 0.6s;
+        }
+
+        .dj-amplifier .amplifier-bar:nth-child(2) {
+            animation-delay: 0.6s;
+            animation-duration: 0.7s;
+        }
+
+        .dj-amplifier .amplifier-bar:nth-child(3) {
+            animation-delay: 0.4s;
+            animation-duration: 0.8s;
+        }
+
+        .dj-amplifier .amplifier-bar:nth-child(4) {
+            animation-delay: 0.2s;
+            animation-duration: 0.7s;
+        }
+
+        .dj-amplifier .amplifier-bar:nth-child(5) {
+            animation-delay: 0s;
+            animation-duration: 0.6s;
+        }
+
+        /* Updated @keyframes for bottom-to-top animation */
+        @keyframes amplify {
+            0% {
+                height: 20px;
+                background-color: #e63946;
+            }
+
+            50% {
+                height: 40px;
+                background-color: #f4a261;
+            }
+
+            100% {
+                height: 60px;
+                background-color: #2a9d8f;
+            }
+        }
+
+        /* Next Page Button */
+        .next-page-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: #0a9396;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .next-page-button:hover {
+            background-color: #007b83;
+        }
+
+        /* Full-Screen Animation Overlay */
+        .animation-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            flex-direction: column;
+            animation: fadeInOut 2s infinite;
+        }
+
+        /* Fade In/Out effect */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+       /* Full-Screen Bubble Container */
+.bubbles {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;  /* Allow clicking through the bubbles */
+    z-index: 9999;  /* Make sure bubbles appear above all other elements */
+}
+
+/* Bubble Animation */
+.bubble {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 70px;  /* Increased size */
+    height: 70px; /* Increased size */
+    background-color: #00f0ff;
+    border-radius: 50%;
+    animation: floatUp 3s infinite;
+    opacity: 0.7;
+}
+
+/* Randomized bubble animation delays */
+.bubble:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.bubble:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.bubble:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.bubble:nth-child(4) {
+    animation-delay: 3s;
+}
+
+.bubble:nth-child(5) {
+    animation-delay: 4s;
+}
+
+/* Floating Up Animation */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-200vh) scale(1);
+        opacity: 0.7;
+    }
+}
+
+
+        /* Pulsing effect */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        .music-waves {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: flex-end;
+            margin-top: 20px;
+        }
+
+        /* Music wave bars */
+        .wave-bar {
+            width: 10px;
+            background-color: #e63946;
+            border-radius: 5px;
+            animation: wave 1.2s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+
+        /* Staggered animations for wave bars */
+        .wave-bar:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .wave-bar:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .wave-bar:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .wave-bar:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        .wave-bar:nth-child(5) {
+            animation-delay: 1s;
+        }
+
+        /* Wave animation */
+        @keyframes wave {
+            0% {
+                height: 30px;
+                opacity: 0.8;
+            }
+
+            50% {
+                height: 60px;
+                opacity: 1;
+            }
+
+            100% {
+                height: 30px;
+                opacity: 0.8;
+            }
+        }
+
+        .animation-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Labels Section */
+        .labels-section {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            font-size: 1.1rem;
+            color: #333;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .label-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .label-item strong {
+            font-weight: bold;
+            color: #005f73;
+        }
+
+        /* Professional Powered by Text Styling */
+        .powered-by-text {
+            font-size: 1.5rem;
+            /* Balanced text size */
+            color: #004c4c;
+            /* Muted, corporate-friendly color */
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            /* Medium font weight for a sleek appearance */
+            letter-spacing: 1px;
+            /* Subtle spacing for clarity */
+            text-transform: uppercase;
+            /* Capitalize for a stronger presence */
+            border-bottom: 2px solid #0a9396;
+            /* Adds a clean underline effect */
+            padding-bottom: 5px;
+        }
+
+        /* Text Hover Effect */
+        .powered-by-text:hover {
+            color: #0a9396;
+            /* Accent color on hover */
+            transition: color 0.3s ease-in-out;
+            /* Smooth transition for hover */
+        }
+
+        .status-active {
+            color: green;
+            font-weight: bold;
+        }
+
+        /* Hover effect for Channel A */
+        .panel .output-box:nth-child(1):hover {
+            /* background-color: #b3e8e8; /* Highlighted background */
+            /* color: #09cff7; /* Adjust text color for contrast */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            /* Add shadow for emphasis */
+            transform: scale(1.05);
+            /*Slight scaling effect */
+            /*transition: all 0.3s ease-in-out; /* Smooth transition */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left panel -->
+        <div class="panel">
+            <div class="output-box">
+                <p><strong>Temperature CH A:</strong> 21°C</p>
+                <p><strong>Temperature SMPS:</strong>22°C</p>
+                <p><strong>Power Output A:</strong> 500W</p>
+                <p><strong>Status:</strong> Active</p>
+            </div>
+            <div class="dj-amplifier">
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+            </div>
+            <div class="output-box">
+                <p><strong>Temperature CH B:</strong> 0°C</p>
+                <p><strong>Temperature SMPS:</strong> 0°C</p>
+                <p><strong>Power Output B:</strong> 0W</p>
+                <p><strong>Status:</strong> Un-available</p>
+            </div>
+        </div>
+
+        <!-- Center section -->
+        <div class="center-section">
+            <!-- Add Powered by text -->
+            <h2 class="powered-by-text">Powered by Elexico Digitals</h2>
+
+
+            <h1 class="search-title">Search for Songs</h1>
+            <div class="search-bar">
+                <input id="searchInput" class="search-input" type="text" placeholder="Enter song name">
+                <button class="search-button" onclick="searchSong()">Search</button>
+            </div>
+            <select id="platformSelect" class="platform-select">
+                <option value="youtube">YouTube</option>
+                <option value="spotify">Spotify</option>
+            </select>
+
+            <!-- Next Page Button -->
+            <button class="next-page-button" onclick="goToNextPage()">Next Page</button>
+
+            <!-- Labels Section -->
+            <div class="labels-section">
+                <div class="label-item">
+                    <strong>AC Input:</strong> ----
+                </div>
+                <div class="label-item">
+                    <strong>Active Channel:</strong> 1
+                </div>
+                <div class="label-item">
+                    <strong>Fault:</strong> 0
+                </div>
+                <div class="label-item">
+                    <strong>Input Mode:</strong> Screen
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Right panel -->
+        <div class="panel">
+            <div class="output-box">
+                <p><strong>Temperature CH C:</strong> 0°C</p>
+                <p><strong>Temperature SMPS:</strong> 0°C</p>
+                <p><strong>Power Output D:</strong> 0 W</p>
+                <p><strong>Status:</strong> Un-available</p>
+            </div>
+            <div class="dj-amplifier">
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+            </div>
+            <div class="output-box">
+                <p><strong>Temperature CH D:</strong> 0°C</p>
+                <p><strong>Temperature SMPS:</strong> 0°C</p>
+                <p><strong>Power Output C:</strong> 0W</p>
+                <p><strong>Status:</strong> Un-available</p>
+            </div>
+        </div>
+        <!-- Full-Screen Animation Overlay -->
+        <div class="animation-overlay" id="animation-overlay">
+            <div class="wave-container">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+            </div>
+        </div>
+
+
+
+
+        <script>
+            function searchSong() {
+                const query = document.getElementById('searchInput').value;
+                const platform = document.getElementById('platformSelect').value;
+                let url = '';
+
+                if (platform === 'youtube') {
+                    url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+                } else if (platform === 'spotify') {
+                    url = `https://open.spotify.com/search/${encodeURIComponent(query)}`;
+                }
+
+                if (query) {
+                    window.open(url, '_blank');
+                } else {
+                    alert("Please enter a search term.");
+                }
+            }
+
+            function goToNextPage() {
+                window.location.href = "page2.html"; // Replace with the actual next page URL
+            }
+
+            function updatePanels() {
+                // Utility function to generate random values
+                function getRandomValue(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+                // Generate random values for each panel
+                const tempA = getRandomValue(28, 31);
+
+                //const tempB = getRandomValue(20, 30);
+                //const tempC = getRandomValue(20, 30);
+                //const tempD = getRandomValue(20, 30);
+
+                const powerOutA = getRandomValue(0,100);
+
+                //const powerOutB = getRandomValue(400, 600);
+                // const powerOutC = getRandomValue(400, 600);
+                // const powerOutD = getRandomValue(400, 600);
+
+                // Update left panel
+                document.querySelector('.panel .output-box:nth-child(1)').innerHTML = `
+                <p><strong>Temperature CH A:</strong> ${tempA}°C</p>
+                <p><strong>Temperature SMPS:</strong> ${0}°C</p>
+                <p><strong>Power Output A:</strong> ${powerOutA}W</p>
+                <p><strong>Status:</strong> <span class="status-active">Active</span></p>
+
+            `;
+
+                // <!-- document.querySelector('.panel .output-box:nth-child(3)').innerHTML = `
+                // <p><strong>Temperature CH B:</strong> ${tempB}°C</p>
+                //<p><strong>Temperature SMPS:</strong> ${tempB + 1}°C</p>
+                // <p><strong>Power Output B:</strong> ${powerOutB}W</p>
+                // <p><strong>Status:</strong> Active</p>
+                //`; -->
+
+                // Update right panel
+                //const rightPanel = document.querySelectorAll('.panel')[1];
+                //rightPanel.querySelector('.output-box:nth-child(1)').innerHTML = `
+                //  <p><strong>Temperature CH D:</strong> ${tempD}°C</p>
+                // <p><strong>Temperature SMPS:</strong> ${tempD + 1}°C</p>
+                // <p><strong>Power Output D:</strong> ${powerOutD}W</p>
+                // <p><strong>Status:</strong> Active</p>
+                //`;
+
+                // rightPanel.querySelector('.output-box:nth-child(3)').innerHTML = `
+                //<p><strong>Temperature CH C:</strong> ${tempC}°C</p>
+                //<p><strong>Temperature SMPS:</strong> ${tempC + 1}°C</p>
+                //<p><strong>Power Output C:</strong> ${powerOutC}W</p>
+                //<p><strong>Status:</strong> Active</p>
+                //`;
+            }
+
+            // Call the updatePanels function every 5 seconds
+            setInterval(updatePanels, 10000);
+
+            // Initial call to populate values on page load
+            updatePanels();
+
+
+
+            // Idle timer to trigger animation after 5 seconds
+            let idleTime = 0;
+            const animationOverlay = document.getElementById('animation-overlay');
+
+            let idleInterval = setInterval(function () {
+                idleTime++;
+                if (idleTime > 15) { // If idle for more than 15 seconds
+                    animationOverlay.style.display = 'flex';
+                }
+            }, 1000);
+
+            document.body.addEventListener('mousemove', function () {
+                idleTime = 0;
+                animationOverlay.style.display = 'none';
+            });
+
+            document.body.addEventListener('click', function () {
+                idleTime = 0;
+                animationOverlay.style.display = 'none';
+            });
+
+
+        </script>
+</body>
+
+</html>
