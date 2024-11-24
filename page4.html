@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Amplifier Dashboard</title>
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(26, 32, 44);
+            /* Dark slate background */
+            font-family: 'Roboto', sans-serif;
+            color: rgb(241, 241, 241);
+            /* Light gray text */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1280px;
+            height: 420px;
+            background: rgb(39, 55, 70);
+            /* Dark matte background */
+            border-radius: 20px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8);
+            padding: 20px;
+        }
+
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 15px;
+            padding: 20px;
+            background: rgb(52, 73, 94);
+            /* Slightly lighter matte background */
+            border: 1px solid rgb(44, 62, 80);
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .panel-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0px 3px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .panel-box p {
+            font-size: 19px;
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        /* Professional Text Styling */
+        .top-text {
+            font-size: 16px;
+            color: rgb(148, 135, 135);
+            /* Light gray for a soft, professional look */
+            font-weight: bold;
+            text-transform: uppercase;
+            /* Make the text uppercase for a sleek look */
+            letter-spacing: 1.2px;
+            /* Add some spacing between letters */
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+            /* Subtle shadow for depth */
+            font-family: 'Arial', sans-serif;
+            /* Clean, modern sans-serif font */
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: rgb(189, 195, 199);
+            margin-top: 10px;
+            font-weight: normal;
+        }
+
+        .center-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .circular-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .circular-display {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .circular-indicator {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: conic-gradient(rgb(54, 193, 87), rgb(42, 128, 226), rgb(26, 82, 138));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .inner-circle {
+            width: 85%;
+            height: 85%;
+            background-color: rgb(44, 62, 80);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            color: rgb(236, 240, 241);
+            font-weight: bold;
+        }
+
+        .circular-label {
+            font-size: 14px;
+            color: rgb(189, 195, 199);
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .bottom-info {
+            text-align: center;
+            font-size: 14px;
+            color: rgb(189, 195, 199);
+            margin-top: 20px;
+            font-weight: normal;
+        }
+
+        .back-button {
+            background-color: rgb(58, 150, 250);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px rgba(0, 102, 204, 0.5);
+        }
+
+        .back-button:hover {
+            background-color: rgb(40, 120, 215);
+        }
+
+        /* Status Active Styling */
+        .active-status {
+            color: rgb(0, 255, 128);
+            /* Neon green for the word ACTIVE */
+        }
+
+        /* Music Icon Styling */
+        .music-icon {
+            font-size: 40px;
+            margin-top: 20px;
+            margin-left: 30px;
+            animation: pulse 2s infinite, rotateMusicIcon 4s linear infinite;
+            color: rgb(205, 53, 129);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Panel -->
+        <div class="panel">
+            <div class="top-text">Digital Amplifier Prototype</div>
+            <div class="panel-box">
+                <!-- Channel A Text Updates -->
+                <p id="tempA" class="bold-text">TEMP CH A: <span class="precise-text">25.32°C</span></p>
+                <p id="powerA" class="bold-text">POWER OUT A: <span class="precise-text">495.67W</span></p>
+                <p id="smpsA" class="bold-text">TEMP SMPS A: <span class="precise-text">0°C</span></p>
+                <p class="bold-text">STATUS: <span class="active-status">ACTIVE</span></p>
+
+                <div class="music-icon">🎶</div>
+
+                <p>TEMP CH B: 0°C</p>
+                <p>POWER OUT B: 0W</p>
+                <p>TEMP SMPS B: 0°C</p>
+                <p>STATUS: Un-available</p>
+            </div>
+        </div>
+
+        <!-- Center Container -->
+        <div class="center-container">
+            <div class="circular-section">
+                <!-- Temperature Indicator -->
+                <div class="circular-display">
+                    <div class="circular-indicator" id="tempIndicator">
+                        <div class="inner-circle" id="tempValue">25.32°C</div>
+                    </div>
+                    <div class="circular-label">Temperature</div>
+                </div>
+
+                <!-- Gain Indicator -->
+                <div class="circular-display">
+                    <div class="circular-indicator" id="gainIndicator">
+                        <div class="inner-circle" id="gainValue">75%</div>
+                    </div>
+                    <div class="circular-label">Gain</div>
+                </div>
+
+                <!-- Volume Indicator -->
+                <div class="circular-display">
+                    <div class="circular-indicator">
+                        <div class="inner-circle">81%</div>
+                    </div>
+                    <div class="circular-label">Volume</div>
+                </div>
+            </div>
+
+            <div class="bottom-info">
+                <p>AC INPUT:---- &nbsp;&nbsp; ACTIVE CHANNEL: 1 &nbsp;&nbsp; FAULT: 0 &nbsp;&nbsp; INPUT MODE: SCREEN
+                </p>
+            </div>
+            <button class="back-button" onclick="window.history.back()">Go Back</button>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="panel panel-right">
+            <div class="top-text">Powered by Elexico Digitals</div>
+            <div class="panel-box">
+                <p>TEMP CH C: 0°C</p>
+                <p>POWER OUT C: 0W</p>
+                <p>TEMP SMPS C: 0°C</p>
+                <p>STATUS: Un-available</p>
+
+                <div class="music-icon">🎶</div>
+
+                <p>TEMP CH D: 0°C</p>
+                <p>POWER OUT D: 0W</p>
+                <p>TEMP SMPS D: 0°C</p>
+                <p>STATUS: Un-available</p>
+            </div>
+        </div>
+    </div>
+    <script>
+       // Function to generate random values for Channel A, Temperature, and Gain
+function generateRandomValues() {
+    // Generate a random temperature value between 28°C and 40°C
+    let tempValue = (Math.random() * (31 - 28) + 28).toFixed(2); // Random between 28 and 40
+    let smpsValue = (parseFloat(0) + 0).toFixed(0); // SMPS is 1°C higher
+    let powerValue = (Math.random() * (100 - 0) + 0).toFixed(2); // Random between 400W and 600W
+
+    // Update Channel A values in the panel
+    document.getElementById('tempA').innerHTML = `TEMP CH A: <span class="precise-text">${tempValue}°C</span>`;
+    document.getElementById('smpsA').innerHTML = `TEMP SMPS A: ${smpsValue}°C`;
+    document.getElementById('powerA').innerHTML = `POWER OUT A: ${powerValue}W`;
+
+    // Update the circular temperature indicator based on tempValue (range 28°C - 40°C)
+    let tempIndicator = document.getElementById('tempIndicator');
+    let tempPercentage = (parseFloat(tempValue) - 28) / (31 - 28) * 100; // Normalize temperature to percentage (28°C = 0%, 40°C = 100%)
+
+    // Log the calculated percentage to check the correctness
+    console.log(`Temperature: ${tempValue}°C, Percentage: ${tempPercentage}%`);
+
+    // Update the circular temperature indicator with a conic gradient based on temperature percentage
+    tempIndicator.style.background = `conic-gradient(rgb(54, 193, 87) ${tempPercentage * 3.6}deg, rgb(42, 128, 226) 0deg)`;
+
+    // Update the inner circle text of the temperature circular indicator
+    document.getElementById('tempValue').innerHTML = `${tempValue}°C`; // Sync the text inside the circle
+
+    // Update the gain value randomly between 50% and 100%
+    let gainValue = (Math.random() * (100 - 50) + 50).toFixed(2); // Random between 50% and 100%
+    let gainPercentage = gainValue; // Use gainValue directly for percentage
+
+    // Update the gain indicator based on gainValue
+    let gainIndicator = document.getElementById('gainIndicator');
+    gainIndicator.style.background = `conic-gradient(rgb(54, 193, 87) ${gainPercentage * 3.6}deg, rgb(42, 128, 226) 0deg)`;
+    document.getElementById('gainValue').innerHTML = `${gainValue}%`; // Update the text in the circular gain indicator
+}
+
+// Update values every second
+setInterval(generateRandomValues, 10000);
+
+    </script>
+
+</body>
+
+</html>
