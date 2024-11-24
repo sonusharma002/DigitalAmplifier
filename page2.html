@@ -110,22 +110,18 @@
         }
 
         .amplifier-container {
-            width: 1280px;
-            /* Set width to 1280px */
-            height: 420px;
-            /* Set height to 420px */
-            max-width: 1280px;
-            /* Ensure it doesn’t exceed 1280px */
-            max-height: 420px;
-            /* Ensure it doesn’t exceed 420px */
-            background-color: #e7f0f2;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            animation: slideUp 1s ease-in-out;
-        }
+    width: 100%; /* Take up full width of the parent container */
+    max-width: 1280px; /* Limit the maximum width */
+    height: auto; /* Adjust height based on content */
+    aspect-ratio: 1280 / 420; /* Maintain a 1280:420 aspect ratio */
+    background-color: #e7f0f2;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 1s ease-in-out;
+}
 
 
         @keyframes slideUp {
@@ -303,12 +299,44 @@
         /*mobile responsible*/
 
 
-       @media (max-width: 1280px) {
+       /* For large devices (desktops) */
+@media (min-width: 1024px) {
     .amplifier-container {
-        width: 100%;
+        width: 80%; /* Occupy 80% of the screen width */
+        height: auto; /* Adjust height to maintain aspect ratio */
+    }
+}
+
+/* For tablets */
+@media (max-width: 1024px) {
+    .amplifier-container {
+        width: 90%; /* Occupy 90% of the screen width */
         height: auto;
     }
 }
+
+/* For mobile devices */
+@media (max-width: 768px) {
+    .amplifier-container {
+        width: 95%; /* Occupy 95% of the screen width */
+        height: auto;
+    }
+
+    .control-panel, .main-section {
+        flex-direction: column; /* Stack elements vertically */
+        gap: 10px; /* Add some spacing */
+    }
+
+    .info-panel, .control-box {
+        width: 100%; /* Make child elements take full width */
+        margin-bottom: 10px; /* Add space between elements */
+    }
+
+    .powered-by-text {
+        font-size: 1em; /* Adjust text size */
+    }
+}
+
 
     </style>
 </head>
