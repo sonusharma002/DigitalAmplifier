@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Amplifier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #282828;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #1a2c32;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Fade-in Animation for Body */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .amplifier-container {
+            width: 1280px;
+            height: 450px;
+            background-color: #e7f0f2;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .control-panel {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            flex-grow: 1;
+            gap: 10px;
+        }
+
+        .info-panel {
+            width: 18%;
+            padding: 10px;
+            background-color: #228b91;
+            border-radius: 15px;
+            animation: fadeIn 1.5s ease forwards;
+            animation-delay: 0.5s;
+            transition: transform 0.3s ease;
+        }
+
+        /* Glow effect on hover */
+        .info-panel:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(23, 93, 102, 0.7);
+        }
+
+        .channel-info {
+            background-color: #175d66;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #f1f5f5;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .main-section {
+            flex: 2;
+            padding: 15px;
+            background-color: #34495e;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            color: #ecf0f1;
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Glow effect on hover */
+        .main-section:hover {
+            box-shadow: 0 0 20px rgba(52, 73, 94, 0.6);
+        }
+
+        /* Container for Input and Output Controls */
+        .control-box {
+            width: 45%;
+            background-color: #2a3b47;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slider {
+            width: 80%;
+            height: 10px;
+            background-color: #2a585e;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slider:hover {
+            background-color: #179688;
+        }
+
+        .slider-label {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        /* Music Visualization Area */
+        .music-visualization {
+            height: 140px;
+            width: 100%;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            border-radius: 8px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 15px rgba(44, 62, 80, 0.8);
+        }
+
+        /* Pulse Animation for Visualization Area */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(44, 62, 80, 0.8);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(44, 62, 80, 1);
+            }
+        }
+
+        .system-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #34495e;
+            font-size: 0.9em;
+            color: #ecf0f1;
+            border-top: 2px solid #2c3e50;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background-color: #2a585e;
+            border-top: 2px solid #1a656c;
+        }
+
+        /* Navigation buttons for next/prev pages */
+        .nav-button {
+            background-color: #179688;
+            border-radius: 5px;
+            width: 100px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        .nav-button:hover {
+            background-color: #128173;
+            transform: scale(1.1);
+        }
+         .powered-by-text {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ecf0f1cc;
+            font-size: 1.3em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+            white-space: nowrap; /* Ensures the text stays on one line */
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <div class="amplifier-container">
+        <div class="control-panel">
+            <!-- Left Channel Info Panels (A and B) -->
+            <div class="info-panel">
+                <div class="channel-info">
+                    <h3>Channel A</h3>
+                    <p>TEMP CH A: 21°C</p>
+                    <p>POWER OUT A: 500W</p>
+                    <p>TEMP SMPS A: 25°C</p>
+                    <p>STATUS: <span class="status-active">ACTIVE</span></p>
+
+                </div>
+                <div class="channel-info">
+                    <h3>Channel B</h3>
+                    <p>TEMP CH B:0°C</p>
+                    <p>POWER OUT B: 0W</p>
+                    <p>TEMP SMPS B: 0°C</p>
+                    <p>STATUS: Un-available</p>
+                </div>
+            </div>
+
+            <!-- Main Section with Visualization and Controls in Background Boxes -->
+            <div class="main-section">
+                <!-- Input Controls Box -->
+                <div class="control-box">
+                    <h3>Input Controls</h3>
+                    <label class="slider-label" for="volume-slider">Volume</label>
+                    <input type="range" id="volume-slider" class="slider" min="0" max="100" value="50">
+                    <label class="slider-label" for="bass-slider">Bass</label>
+                    <input type="range" id="bass-slider" class="slider" min="0" max="100" value="50">
+                    <label class="slider-label" for="treble-slider">Treble</label>
+                    <input type="range" id="treble-slider" class="slider" min="0" max="100" value="50">
+                </div>
+
+                <div class="music-visualization" id="music-visualization">
+                    <canvas id="visualization-canvas"></canvas>
+                    <div class="powered-by-text">Powered By Elexico Digitals</div>
+                </div>
+                
+
+                <!-- Output Controls Box -->
+                <div class="control-box">
+                    <h3>Output Controls</h3>
+                    <label class="slider-label" for="vocal-slider">Vocal</label>
+                    <input type="range" id="vocal-slider" class="slider" min="0" max="100" value="50">
+                    <label class="slider-label" for="reverb-slider">Reverb</label>
+                    <input type="range" id="reverb-slider" class="slider" min="0" max="100" value="50">
+                    <label class="slider-label" for="echo-slider">Echo</label>
+                    <input type="range" id="echo-slider" class="slider" min="0" max="100" value="50">
+                </div>
+            </div>
+
+            <!-- Right Channel Info Panels (C and D) -->
+            <div class="info-panel">
+                <div class="channel-info">
+                    <h3>Channel C</h3>
+                    <p>TEMP CH C: 0°C</p>
+                    <p>POWER OUT C: 0W</p>
+                    <p>TEMP SMPS C: 0°C</p>
+                    <p>STATUS:Un-available</p>
+                </div>
+                <div class="channel-info">
+                    <h3>Channel D</h3>
+                    <p>TEMP CH D: 0°C</p>
+                    <p>POWER OUT D: 0W</p>
+                    <p>TEMP SMPS D: 0°C</p>
+                    <p>STATUS: Un-available</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom System Information and Player Controls -->
+        <div class="system-info">
+            <p>AC INPUT: ----</p>
+            <p>ACTIVE CHANNEL: 1</p>
+            <p>FAULT: 0</p>
+            <p>INPUT MODE: SCREEN</p>
+        </div>
+
+        <div class="player-controls">
+            <!-- Navigation Buttons (Previous and Next) with Links -->
+            <a href="page2.html" class="nav-button nav-button-left" id="prev-page-button">Previous</a>
+            <a href="page4.html" class="nav-button nav-button-right" id="next-page-button">Next</a>
+        </div>
+    </div>
+
+    <script>
+        // Visualization Effect
+        const canvas = document.getElementById("visualization-canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Resize the canvas on window resize to keep it responsive
+        function resizeCanvas() {
+            canvas.width = document.querySelector('.music-visualization').clientWidth;
+            canvas.height = document.querySelector('.music-visualization').clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Animated Visualization
+        let lastFrameTime = 0;
+        const animationSpeed = 50;
+
+        function drawVisualization(timestamp) {
+            if (timestamp - lastFrameTime > animationSpeed) {
+                lastFrameTime = timestamp;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < 46; i++) {
+                    const x = i * 10;
+                    const barHeight = Math.random() * canvas.height;
+                    ctx.fillStyle = `hsl(${barHeight * 1.2}, 70%, 50%)`;
+                    ctx.fillRect(x, canvas.height - barHeight, 8, barHeight);
+                }
+            }
+            requestAnimationFrame(drawVisualization);
+        }
+
+        requestAnimationFrame(drawVisualization);
+         
+            function updateChannelA() {
+                const temperature = (Math.random() * (31 - 28) + 28).toFixed(1);
+                const tempSmps = (parseFloat(0) + 0).toFixed(1);
+                const powerOut = (Math.random() * (100 - 0) + 0).toFixed(1);
+        
+                // Update the HTML content for Channel A
+                document.querySelector('.info-panel .channel-info h3').innerText = "Channel A";
+                document.querySelector('.info-panel .channel-info p:nth-of-type(1)').innerText = `TEMP CH A: ${temperature}°C`;
+                document.querySelector('.info-panel .channel-info p:nth-of-type(2)').innerText = `POWER OUT A: ${powerOut}W`;
+                document.querySelector('.info-panel .channel-info p:nth-of-type(3)').innerText = `TEMP SMPS A: ${tempSmps}°C`;
+                
+                // Change "ACTIVE" to green
+                const statusElement = document.querySelector('.info-panel .channel-info p:nth-of-type(4) .status-active');
+                if (statusElement) {
+                    statusElement.style.color = 'lightgreen';
+                }
+            }
+        
+            // Update Channel A every 10 second
+            setInterval(updateChannelA, 10000);
+        
+            // Initial update
+            updateChannelA();
+        
+        
+       
+        
+    </script>
+</body>
+
+</html>
